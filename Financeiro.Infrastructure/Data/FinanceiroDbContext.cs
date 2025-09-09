@@ -1,0 +1,83 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Financeiro.Domain.Entidades;
+
+namespace Financeiro.Infrastructure.Data
+{
+    public class FinanceiroDbContext : DbContext
+    {
+        public FinanceiroDbContext(DbContextOptions<FinanceiroDbContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Banco> Bancos { get; set; }
+        public DbSet<Conta> Contas { get; set; }
+        public DbSet<Lancamento> Lancamentos { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Transacao> Transacoes { get; set; }
+        public DbSet<LancamentoXtransacao> LancamentosXtransacoes { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configurações para as chaves primárias
+            modelBuilder.Entity<Usuario>()
+                .HasKey(u => u.Id);
+
+            modelBuilder.Entity<Banco>()
+                .HasKey(b => b.IdBanco);
+
+            modelBuilder.Entity<Conta>()
+                .HasKey(c => c.IdConta);
+
+            modelBuilder.Entity<Lancamento>()
+                .HasKey(l => l.IdLancamento);
+
+            modelBuilder.Entity<Categoria>()
+                .HasKey(c => c.IdCategoria);
+
+            modelBuilder.Entity<Transacao>()
+                .HasKey(t => t.IdTransacao);
+
+            // Configurações dos relacionamentos
+
+            // Conta <--> Banco (unidirecional)
+            modelBuilder.Entity<Conta>()
+                .HasOne(c => c.Banco)
+                .WithMany()
+                .HasForeignKey(c => c.IdBanco);
+
+            // Conta <--> Usuario (unidirecional)
+            modelBuilder.Entity<Conta>()
+                .HasOne(c => c.Usuario)
+                .WithMany()
+                .HasForeignKey(c => c.IdUsuario);
+
+            // Lancamento <--> Conta (unidirecional)
+            modelBuilder.Entity<Lancamento>()
+                .HasOne(l => l.Conta)
+                .WithMany()
+                .HasForeignKey(l => l.IdConta);
+
+            // Transacao <--> Categoria (unidirecional)
+            modelBuilder.Entity<Transacao>()
+                .HasOne(t => t.Categoria)
+                .WithMany()
+                .HasForeignKey(t => t.IdCategoria);
+
+            // Configuração para a tabela de junção (join entity)
+            modelBuilder.Entity<LancamentoXtransacao>()
+                .HasKey(lt => lt.Id);
+
+            modelBuilder.Entity<LancamentoXtransacao>()
+                .HasOne(lt => lt.Lancamento)
+                .WithMany()
+                .HasForeignKey(lt => lt.IdLancamento);
+
+            modelBuilder.Entity<LancamentoXtransacao>()
+                .HasOne(lt => lt.Transacao)
+                .WithMany()
+                .HasForeignKey(lt => lt.IdTransacao);
+        }
+    }
+}
