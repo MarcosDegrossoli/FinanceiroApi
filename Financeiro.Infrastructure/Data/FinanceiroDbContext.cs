@@ -43,7 +43,7 @@ namespace Financeiro.Infrastructure.Data
                 .HasKey(lt => lt.Id);
             #endregion
 
-
+            #region Relacionamentos
             modelBuilder.Entity<Conta>()
                 .HasOne(c => c.Banco)
                 .WithMany()
@@ -73,6 +73,7 @@ namespace Financeiro.Infrastructure.Data
                 .HasOne(lt => lt.Transacao)
                 .WithMany()
                 .HasForeignKey(lt => lt.IdTransacao);
+            #endregion
         }
     }
 }
