@@ -20,7 +20,7 @@ namespace Financeiro.Infrastructure.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configurações para as chaves primárias
+            #region ChavesPrimarias
             modelBuilder.Entity<Usuario>()
                 .HasKey(u => u.Id);
 
@@ -39,35 +39,30 @@ namespace Financeiro.Infrastructure.Data
             modelBuilder.Entity<Transacao>()
                 .HasKey(t => t.IdTransacao);
 
-            // Configurações dos relacionamentos
+            modelBuilder.Entity<LancamentoXtransacao>()
+                .HasKey(lt => lt.Id);
+            #endregion
 
-            // Conta <--> Banco (unidirecional)
+
             modelBuilder.Entity<Conta>()
                 .HasOne(c => c.Banco)
                 .WithMany()
                 .HasForeignKey(c => c.IdBanco);
 
-            // Conta <--> Usuario (unidirecional)
             modelBuilder.Entity<Conta>()
                 .HasOne(c => c.Usuario)
                 .WithMany()
                 .HasForeignKey(c => c.IdUsuario);
 
-            // Lancamento <--> Conta (unidirecional)
             modelBuilder.Entity<Lancamento>()
                 .HasOne(l => l.Conta)
                 .WithMany()
                 .HasForeignKey(l => l.IdConta);
 
-            // Transacao <--> Categoria (unidirecional)
             modelBuilder.Entity<Transacao>()
                 .HasOne(t => t.Categoria)
                 .WithMany()
                 .HasForeignKey(t => t.IdCategoria);
-
-            // Configuração para a tabela de junção (join entity)
-            modelBuilder.Entity<LancamentoXtransacao>()
-                .HasKey(lt => lt.Id);
 
             modelBuilder.Entity<LancamentoXtransacao>()
                 .HasOne(lt => lt.Lancamento)
