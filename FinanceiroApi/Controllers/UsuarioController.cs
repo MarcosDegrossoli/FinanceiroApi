@@ -56,7 +56,10 @@ namespace FinanceiroApi.Application.Controllers
                 return BadRequest();
             }
             await _usuarioService.UpdateAsync(usuario);
-            return NoContent();
+
+                var usuarioAtualizado = await _usuarioService.GetByIdAsync(id);
+
+                return Ok(usuarioAtualizado);
         }
 
         [HttpDelete("{id}")]
