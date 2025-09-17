@@ -38,28 +38,36 @@ namespace FinanceiroApi.Application.Controllers
         {
             try
             {
-            await _usuarioService.AddAsync(usuario);
-            return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);
-        }
+                await _usuarioService.AddAsync(usuario);
+                return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);
+            }
             catch (Exception execao)
             {
                 return BadRequest(execao.Message);
             }
-
+            
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, Usuario usuario)
         {
-            if (id != usuario.Id)
+
+            try
             {
-                return BadRequest();
-            }
-            await _usuarioService.UpdateAsync(usuario);
+                if (id != usuario.Id)
+                {
+                    return BadRequest();
+                }
+                await _usuarioService.UpdateAsync(usuario);
 
                 var usuarioAtualizado = await _usuarioService.GetByIdAsync(id);
 
                 return Ok(usuarioAtualizado);
+            }
+            catch (Exception excecao)
+            {
+                return BadRequest(excecao.Message);
+            }
         }
 
         [HttpDelete("{id}")]
