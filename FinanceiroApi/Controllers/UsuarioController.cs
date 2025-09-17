@@ -36,8 +36,16 @@ namespace FinanceiroApi.Application.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Usuario usuario)
         {
+            try
+            {
             await _usuarioService.AddAsync(usuario);
             return CreatedAtAction(nameof(GetById), new { id = usuario.Id }, usuario);
+        }
+            catch (Exception execao)
+            {
+                return BadRequest(execao.Message);
+            }
+
         }
 
         [HttpPut("{id}")]
