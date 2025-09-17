@@ -17,4 +17,9 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Financeiro.Domain\Financeiro.Domain.csproj" />
+    <ProjectReference Include="..\Financeiro.Infrastructure\Financeiro.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
