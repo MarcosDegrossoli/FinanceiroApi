@@ -1,3 +1,10 @@
+using Financeiro.Infrastructure.Data;
+using Financeiro.Infrastructure.Interfaces;
+using Financeiro.Infrastructure.Repositories;
+using Financeiro.Services.Interfaces;
+using Financeiro.Services.Services;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +14,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
