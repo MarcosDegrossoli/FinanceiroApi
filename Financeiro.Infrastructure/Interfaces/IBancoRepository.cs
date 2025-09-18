@@ -1,0 +1,9 @@
+﻿using Financeiro.Domain.Entidades;
+
+namespace Financeiro.Infrastructure.Interfaces
+{
+    public interface IBancoRepository
+    {
+        Task<IEnumerable<Banco>> GetAllAsync();
+    }
+}
