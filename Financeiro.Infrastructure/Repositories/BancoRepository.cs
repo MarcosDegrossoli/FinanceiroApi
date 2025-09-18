@@ -19,6 +19,11 @@ namespace Financeiro.Infrastructure.Repositories
             return await _context.Bancos.ToListAsync();
         }
 
+        public async Task<Banco?> GetByIdAsync(Guid id)
+        {
+            return await _context.Bancos.FindAsync(id);
+        }
+
         public async Task AddAsync(Banco banco)
         {
             _context.Bancos.Add(banco);

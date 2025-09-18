@@ -6,5 +6,6 @@ namespace Financeiro.Services.Interfaces
     {
         Task<IEnumerable<Banco>> GetAllAsync();
         Task AddAsync(Banco banco);
+        Task<Banco?> GetByIdAsync(Guid id);
     }
 }

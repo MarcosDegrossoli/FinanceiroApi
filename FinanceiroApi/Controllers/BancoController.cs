@@ -22,6 +22,17 @@ namespace FinanceiroApi.Controllers
             return Ok(bancos);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var banco = await _bancoService.GetByIdAsync(id);
+            if (banco == null)
+            {
+                return NotFound();
+            }
+            return Ok(banco);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Add(Banco banco)
         {
