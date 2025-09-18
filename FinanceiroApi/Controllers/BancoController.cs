@@ -1,4 +1,5 @@
-﻿using Financeiro.Services.Interfaces;
+﻿using Financeiro.Domain.Entidades;
+using Financeiro.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FinanceiroApi.Controllers
@@ -19,6 +20,20 @@ namespace FinanceiroApi.Controllers
         {
             var bancos = await _bancoService.GetAllAsync();
             return Ok(bancos);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Banco banco)
+        {
+            try
+            {
+                await _bancoService.AddAsync(banco);
+                return CreatedAtAction(nameof(GetAll), new { id = banco.IdBanco }, banco);
+            }
+            catch (Exception execao)
+            {
+                return BadRequest(execao.Message);
+            }
         }
     }
 }

@@ -11,9 +11,15 @@ namespace Financeiro.Services.Services
         {
             _bancoRepository = bancoRepository;
         }
+
         public async Task<IEnumerable<Banco>> GetAllAsync()
         {
             return await _bancoRepository.GetAllAsync();
+        }
+
+        public async Task AddAsync(Banco banco)
+        {
+            await _bancoRepository.AddAsync(banco);
         }
     }
 }
