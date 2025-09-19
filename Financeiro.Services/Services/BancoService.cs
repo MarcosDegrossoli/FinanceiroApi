@@ -26,5 +26,10 @@ namespace Financeiro.Services.Services
         {
             await _bancoRepository.AddAsync(banco);
         }
+
+        public async Task UpdateAsync(Banco banco)
+        {
+            await _bancoRepository.UpdateAsync(banco);
+        }
     }
 }

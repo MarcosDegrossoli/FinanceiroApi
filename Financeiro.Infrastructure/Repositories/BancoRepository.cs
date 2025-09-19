@@ -29,5 +29,11 @@ namespace Financeiro.Infrastructure.Repositories
             _context.Bancos.Add(banco);
             await _context.SaveChangesAsync();
         }
+
+        public async Task UpdateAsync(Banco banco)
+        {
+            _context.Bancos.Update(banco);
+            await _context.SaveChangesAsync();
+        }
     }
 }

@@ -46,5 +46,26 @@ namespace FinanceiroApi.Controllers
                 return BadRequest(execao.Message);
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, Banco banco)
+        {
+            try
+            {
+                if (id != banco.IdBanco)
+                {
+                    return BadRequest();
+                }
+                await _bancoService.UpdateAsync(banco);
+
+                var existingBanco = await _bancoService.GetByIdAsync(id);
+
+                return Ok(existingBanco);
+            }
+            catch (Exception execao)
+            {
+                return BadRequest(execao.Message);
+            }
+        }
     }
 }
