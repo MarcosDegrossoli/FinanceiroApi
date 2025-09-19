@@ -8,5 +8,6 @@ namespace Financeiro.Services.Interfaces
         Task AddAsync(Banco banco);
         Task<Banco?> GetByIdAsync(Guid id);
         Task UpdateAsync(Banco banco);
+        Task DeleteAsync(Guid id);
     }
 }

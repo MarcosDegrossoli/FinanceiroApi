@@ -31,5 +31,10 @@ namespace Financeiro.Services.Services
         {
             await _bancoRepository.UpdateAsync(banco);
         }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            await _bancoRepository.DeleteAsync(id);
+        }
     }
 }

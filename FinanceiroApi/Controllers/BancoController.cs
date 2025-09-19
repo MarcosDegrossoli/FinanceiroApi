@@ -67,5 +67,12 @@ namespace FinanceiroApi.Controllers
                 return BadRequest(execao.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _bancoService.DeleteAsync(id);
+            return NoContent();
+        }
     }
 }

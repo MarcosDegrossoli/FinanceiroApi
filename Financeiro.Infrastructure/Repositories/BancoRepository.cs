@@ -35,5 +35,15 @@ namespace Financeiro.Infrastructure.Repositories
             _context.Bancos.Update(banco);
             await _context.SaveChangesAsync();
         }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var banco = await _context.Bancos.FindAsync(id);
+            if (banco != null)
+            {
+                _context.Bancos.Remove(banco);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
