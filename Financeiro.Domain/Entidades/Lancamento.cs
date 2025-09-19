@@ -7,6 +7,5 @@
         public decimal Valor { get; set; }
         public string Tipo { get; set; }
         public Guid IdConta { get; set; }
-        public Conta Conta { get; set; }
     }
 }
