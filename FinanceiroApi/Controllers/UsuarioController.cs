@@ -51,7 +51,6 @@ namespace FinanceiroApi.Application.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, Usuario usuario)
         {
-
             try
             {
                 if (id != usuario.Id)
