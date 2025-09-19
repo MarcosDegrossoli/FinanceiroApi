@@ -45,17 +45,17 @@ namespace Financeiro.Infrastructure.Data
 
             #region Relacionamentos
             modelBuilder.Entity<Conta>()
-                .HasOne(c => c.Banco)
+                .HasOne<Banco>()
                 .WithMany()
                 .HasForeignKey(c => c.IdBanco);
 
             modelBuilder.Entity<Conta>()
-                .HasOne(c => c.Usuario)
+                .HasOne<Usuario>()
                 .WithMany()
                 .HasForeignKey(c => c.IdUsuario);
 
             modelBuilder.Entity<Lancamento>()
-                .HasOne(l => l.Conta)
+                .HasOne<Conta>()
                 .WithMany()
                 .HasForeignKey(l => l.IdConta);
 
@@ -65,12 +65,12 @@ namespace Financeiro.Infrastructure.Data
                 .HasForeignKey(t => t.IdCategoria);
 
             modelBuilder.Entity<LancamentoXtransacao>()
-                .HasOne(lt => lt.Lancamento)
+                .HasOne<Lancamento>()
                 .WithMany()
                 .HasForeignKey(lt => lt.IdLancamento);
 
             modelBuilder.Entity<LancamentoXtransacao>()
-                .HasOne(lt => lt.Transacao)
+                .HasOne<Transacao>()
                 .WithMany()
                 .HasForeignKey(lt => lt.IdTransacao);
             #endregion
