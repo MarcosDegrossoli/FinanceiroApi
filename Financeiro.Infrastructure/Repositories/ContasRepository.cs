@@ -19,7 +19,7 @@ namespace Financeiro.Infrastructure.Repositories
             return await _context.Contas.ToListAsync();
         }
 
-        public async Task<Conta?> GetByIdAsync(int id)
+        public async Task<Conta?> GetByIdAsync(Guid id)
         {
             return await _context.Contas.FindAsync(id);
         }
@@ -30,9 +30,25 @@ namespace Financeiro.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task UpdateAsync(Conta conta)
+        {
+            _context.Contas.Update(conta);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<Conta> GetByNumeroConta(string numeroConta)
         {
             return await _context.Contas.FirstOrDefaultAsync(c => c.NumeroConta == numeroConta);
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            var conta = await _context.Contas.FindAsync(id);
+            if (conta != null)
+            {
+                _context.Contas.Remove(conta);
+                await _context.SaveChangesAsync();
+            }
         }
     }
 }

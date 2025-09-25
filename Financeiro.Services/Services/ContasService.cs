@@ -19,7 +19,7 @@ namespace Financeiro.Services.Services
             return await _contasRepository.GetAllAsync();
         }
 
-        public async Task<Conta?> GetByIdAsync(int id)
+        public async Task<Conta?> GetByIdAsync(Guid id)
         {
             return await _contasRepository.GetByIdAsync(id);
         }
@@ -31,6 +31,16 @@ namespace Financeiro.Services.Services
             await VerificarDuplicidadeConta(conta, banco);
 
             await _contasRepository.AddAsync(conta);
+        }
+
+        public async Task UpdateAsync(Conta conta)
+        {
+            await _contasRepository.UpdateAsync(conta);
+        }
+
+        public async Task DeleteAsync(Guid id)
+        {
+            await _contasRepository.DeleteAsync(id);
         }
 
         private async Task VerificarDuplicidadeConta(Conta conta, Banco? banco)
