@@ -33,7 +33,9 @@ builder.Services.AddScoped<IBancoRepository, BancoRepository>();
 builder.Services.AddScoped<IContasService, ContasService>();
 builder.Services.AddScoped<IContasRepository, ContasRepository>();
 
+builder.Services.AddScoped<ILancamentosService, LancamentosService>();
 builder.Services.AddScoped<ILancamentosRepository, LancamentosRepository>();
+
 builder.Services.AddDbContext<FinanceiroDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
