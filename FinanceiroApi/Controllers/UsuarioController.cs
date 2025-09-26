@@ -45,7 +45,6 @@ namespace FinanceiroApi.Application.Controllers
             {
                 return BadRequest(execao.Message);
             }
-            
         }
 
         [HttpPut("{id}")]
